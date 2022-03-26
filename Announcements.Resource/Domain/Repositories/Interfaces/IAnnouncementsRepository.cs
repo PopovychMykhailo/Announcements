@@ -5,11 +5,8 @@ using System.Collections.Generic;
 
 namespace Announcements.Resource.Domain.Repositories.Interfaces
 {
-    public interface IAnnouncementRepository
+    public interface IAnnouncementsRepository
     {
-        public AppDbContext Context { get; set; }
-
-
         // Create
         public AnnouncementEntity Add(string title, string description);
         public AnnouncementEntity Add(AnnouncementEntity entity);
@@ -22,6 +19,6 @@ namespace Announcements.Resource.Domain.Repositories.Interfaces
         public AnnouncementEntity Update(AnnouncementEntity entity);
 
         // Delete
-        public bool Delete(Guid id);
+        public void Delete(Guid id);
     }
 }

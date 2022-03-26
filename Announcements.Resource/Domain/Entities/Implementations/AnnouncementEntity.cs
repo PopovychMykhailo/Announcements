@@ -13,18 +13,9 @@ namespace Announcements.Resource.Domain.Entities.Implementations
     {
         private DateTime _dateAdded;
 
-
-        [Required]
         public Guid Id { get; init; }
-
-        [Required]
         public string Title { get; set; }
-
-        [Required]
         public string Description { get; set; }
-
-        [Required]
-        [DataType(DataType.DateTime)]
         public DateTime DateAdded
         {
             get => _dateAdded;
@@ -47,13 +38,21 @@ namespace Announcements.Resource.Domain.Entities.Implementations
             Description = "(description)";
             DateAdded = DateTime.UtcNow;
         }
-
         public AnnouncementEntity(string title, string description)
         {
             Id = Guid.NewGuid();
             Title = title;
             Description = description;
             DateAdded = DateTime.UtcNow;
+        }
+
+
+        public AnnouncementEntity ApplyChanges(AnnouncementEntity source)
+        {
+            Title = source.Title;
+            Description = source.Description;
+
+            return this;
         }
     }
 }

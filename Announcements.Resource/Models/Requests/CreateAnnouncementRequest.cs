@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Announcements.Resource.Models
+namespace Announcements.Resource.Models.Requests
 {
-    public class CreateAnnouncementModel
+    public class CreateAnnouncementRequest
     {
         public string Title { get; set; }
         public string Description { get; set; }

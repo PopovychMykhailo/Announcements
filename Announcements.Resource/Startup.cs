@@ -11,7 +11,8 @@ using Microsoft.OpenApi.Models;
 using Announcements.Resource.Database;
 using Announcements.Resource.Domain.Repositories.Interfaces;
 using Announcements.Resource.Domain.Repositories.Implementations;
-
+using Announcements.Resource.Services.Implementations;
+using Announcements.Resource.Services.Interfaces;
 
 namespace Announcements.Resource
 {
@@ -41,7 +42,8 @@ namespace Announcements.Resource
                 options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
 
             // Add repository
-            services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
+            services.AddScoped<IAnnouncementsRepository, AnnouncementsRepository>();
+            services.AddScoped<IAnnouncementsAnalyzer, AnnouncementsAnalyzer>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
