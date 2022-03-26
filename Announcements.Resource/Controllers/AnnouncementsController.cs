@@ -1,14 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Announcements.Resource.Domain.Repositories.Interfaces;
+using Announcements.Resource.Models;
 
 namespace Announcements.Resource.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class AnnouncementsController : ControllerBase
     {
+        IAnnouncementRepository Announcements;
 
+
+
+        public AnnouncementsController(IAnnouncementRepository announcements)
+        {
+            Announcements = announcements;
+        }
+
+        
+        [HttpPost(nameof(Create))]
+        public IActionResult Create(CreateAnnouncementModel model)
+        {
+            var entity = Announcements.Add(model.Title, model.Description);
+            return Ok(entity);
+        }
     }
 }

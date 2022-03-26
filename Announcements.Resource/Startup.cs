@@ -2,15 +2,16 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Announcements.Resource.Database;
+using Announcements.Resource.Domain.Repositories.Interfaces;
+using Announcements.Resource.Domain.Repositories.Implementations;
+
 
 namespace Announcements.Resource
 {
@@ -34,6 +35,13 @@ namespace Announcements.Resource
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Announcements.Resource", Version = "v1" });
             });
+
+            // Add DB
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+
+            // Add repository
+            services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -48,8 +56,6 @@ namespace Announcements.Resource
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
