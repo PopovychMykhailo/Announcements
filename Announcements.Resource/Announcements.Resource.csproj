@@ -9,13 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Database\" />
-    <Folder Include="Domain\Entities\" />
     <Folder Include="Domain\Exceptions\" />
-    <Folder Include="Domain\Repositories\" />
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
